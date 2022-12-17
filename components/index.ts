@@ -1,3 +1,5 @@
 export * from './Markdown'
 export * from './Page'
 export * from './Sidebar'
+export * from './TableOfContents'
+export * from './Navbar'

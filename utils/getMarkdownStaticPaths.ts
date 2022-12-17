@@ -11,9 +11,7 @@ export const getMarkdownStaticPaths: GetStaticPaths = () => {
       item.data.items.forEach(getRoutes)
     }
   }
-
-  let pages = [...getMarkdownPages()]
-  while (pages.length) getRoutes(pages.shift()!)
+  getMarkdownPages().forEach(getRoutes)
 
   return { paths, fallback: false }
 }

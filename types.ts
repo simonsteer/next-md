@@ -70,6 +70,7 @@ export type PageContent = MarkdownDocument | MarkdownCategory
 export type PageData = {
   content: PageContent
   sidebar: SidebarItem[]
+  toc: ToCItem[]
 }
 
 export type FolderItem = string | [string, FolderItem[]]
@@ -90,3 +91,5 @@ export type SidebarCategoryItem = {
 }
 
 export type SidebarItem = SidebarCategoryItem | SidebarDocumentItem
+
+export type ToCItem = { text: string; id: string; depth: number }

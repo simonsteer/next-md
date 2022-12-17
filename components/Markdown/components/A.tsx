@@ -14,10 +14,8 @@ export const A = forwardRef<HTMLAnchorElement, AProps>(
 
     if (_href.startsWith('/')) {
       return (
-        <Link href={_href} legacyBehavior>
-          <a ref={ref} {...rest}>
-            {children}
-          </a>
+        <Link href={_href} ref={ref} {...rest}>
+          {children}
         </Link>
       )
     }

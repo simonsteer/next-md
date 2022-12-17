@@ -1,7 +1,9 @@
 import { GetStaticProps } from 'next'
 import { getMarkdownPages } from './getMarkdownPages'
-import { PageContent, PageData } from 'types'
+import { PageData } from 'types'
 import { getSidebarData } from './getSidebarData'
+import { getToCData } from './getToCData'
+import { getPageByRoute } from './getPageByRoute'
 
 export const getMarkdownPageStaticProps: GetStaticProps<PageData> = ctx => {
   const params = (ctx.params!.params || []) as string[]
@@ -9,32 +11,9 @@ export const getMarkdownPageStaticProps: GetStaticProps<PageData> = ctx => {
 
   const markdownPages = getMarkdownPages()
 
-  let pagesToCheck = [...markdownPages]
-
-  let content: PageContent | null = null
-  const getPage = (item: PageContent) => {
-    switch (item.type) {
-      case 'category':
-        if (item.data.route === route && item.data.hasCategoryPage) {
-          content = item
-        } else {
-          pagesToCheck.push(...item.data.items)
-        }
-        break
-      case 'document':
-        if (item.data.route === route) {
-          content = item
-        }
-        break
-      default:
-        break
-    }
-  }
-  while (content === null && pagesToCheck.length) {
-    getPage(pagesToCheck.shift()!)
-  }
-
+  const content = getPageByRoute(markdownPages, route)
   const sidebar = getSidebarData(markdownPages, route)
+  const toc = getToCData(content)
 
-  return { props: { content: content!, sidebar } }
+  return { props: { content: content, sidebar, toc } }
 }

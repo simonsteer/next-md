@@ -14,6 +14,7 @@ const PageDataContext = createContext<PageData>({
       title: '',
     },
   },
+  toc: [],
 })
 
 export const PageDataProvider = ({
@@ -33,5 +34,7 @@ export const PageDataProvider = ({
 export const usePageData = () => useContext(PageDataContext)
 
 export const useSidebarData = () => usePageData().sidebar
+
+export const useToCData = () => usePageData().toc
 
 export const usePageContent = () => usePageData().content
