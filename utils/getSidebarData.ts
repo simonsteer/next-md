@@ -11,6 +11,7 @@ export function getSidebarData(
         return {
           type: 'category',
           route: item.data.route,
+          hasCategoryPage: item.data.hasCategoryPage,
           title: item.data.title,
           active: item.data.hasCategoryPage && item.data.route === route,
           items: item.data.items

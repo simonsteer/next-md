@@ -1,16 +1,17 @@
+import clsx from 'clsx'
 import { useSidebarData } from 'hooks'
 import Link from 'next/link'
-import { useState } from 'react'
+import { ReactNode, useState } from 'react'
 import { SidebarCategoryItem, SidebarDocumentItem, SidebarItem } from 'types'
 
 export function Sidebar() {
   const sidebar = useSidebarData()
 
   return (
-    <nav>
+    <nav className="text-sm p-2 w-56">
       <ul>
         {sidebar.map((item, index) => (
-          <li key={index}>
+          <li key={index} className="mt-0.5">
             <SidebarItemComponent item={item} />
           </li>
         ))}
@@ -31,15 +32,69 @@ function SidebarItemComponent({ item }: { item: SidebarItem }) {
 }
 
 function CategoryItem({ item }: { item: SidebarCategoryItem }) {
-  const [isOpen, setIsOpen] = useState(false)
+  const [isOpen, setIsOpen] = useState(() => {
+    let result = false
+
+    const items: SidebarItem[] = [item]
+    while (items.length > 0 && result === false) {
+      const curr = items.shift()!
+      result = curr.active
+      if (curr.type === 'category') {
+        console.log(curr)
+        items.push(...curr.items)
+      }
+    }
+
+    return result
+  })
+
+  let itemChild: ReactNode
+  if (item.hasCategoryPage) {
+    itemChild = (
+      <li className={clsx('h-6 flex', item.active && 'bg-stone-100')}>
+        <Link href={item.route} className="w-full h-full flex flex-1">
+          <span className="flex flex-1">{item.title}</span>
+          <button
+            onClick={e => {
+              e.preventDefault()
+              setIsOpen(!isOpen)
+            }}
+            className={clsx(
+              'w-6 h-6 flex items-center justify-center',
+              isOpen ? 'rotate-180' : 'rotate-90'
+            )}
+          >
+            ^
+          </button>
+        </Link>
+      </li>
+    )
+  } else {
+    itemChild = (
+      <li className={clsx('h-6 flex', item.active && 'bg-stone-100')}>
+        <button
+          className="w-full h-full flex flex-1"
+          onClick={() => setIsOpen(!isOpen)}
+        >
+          <span className="flex flex-1">{item.title}</span>
+          <div
+            className={clsx(
+              'w-6 h-6 flex items-center justify-center',
+              isOpen ? 'rotate-180' : 'rotate-90'
+            )}
+          >
+            ^
+          </div>
+        </button>
+      </li>
+    )
+  }
 
   return (
     <ul>
-      <li>
-        <button onClick={() => setIsOpen(!isOpen)}>{item.title}</button>
-      </li>
+      {itemChild}
       {isOpen && (
-        <li>
+        <li className="ml-4 mt-0.5">
           {item.items.map((item, index) => (
             <SidebarItemComponent key={index} item={item} />
           ))}
@@ -51,8 +106,10 @@ function CategoryItem({ item }: { item: SidebarCategoryItem }) {
 
 function DocumentItem({ item }: { item: SidebarDocumentItem }) {
   return (
-    <div>
-      <Link href={item.route}>{item.title}</Link>
+    <div className={clsx('h-6', item.active && 'bg-stone-100')}>
+      <Link href={item.route} className="block w-full h-full">
+        {item.title}
+      </Link>
     </div>
   )
 }

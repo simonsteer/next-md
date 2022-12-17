@@ -85,6 +85,7 @@ export type SidebarDocumentItem = {
 export type SidebarCategoryItem = {
   type: 'category'
   route: string
+  hasCategoryPage: boolean
   title: string
   active: boolean
   items: SidebarItem[]
