@@ -8,21 +8,6 @@ export type MarkdownPageMetadata = {
   custom: any
 }
 
-export type FrontmatterDataType =
-  | number
-  | string
-  | boolean
-  | null
-  | Date
-  | FrontmatterDataType[]
-  | {
-      [key: string]: FrontmatterDataType
-    }
-
-export type Frontmatter = {
-  [key: string]: FrontmatterDataType
-}
-
 export type CategoryData = {
   title: string
   index: number
@@ -40,35 +25,35 @@ export type JSONValue =
 
 export type JSONObject = { [key: string]: JSONValue }
 
-export type MarkdownDocument = {
+export type MarkdownContentData = {
   type: 'document'
   data: {
+    title: string
+    index: number
     fileName: string
     route: string
     body: string
-    index: number
-    title: string
-    metadata: Frontmatter
+    metadata: JSONObject
   }
 }
 
-export type MarkdownCategory = {
+export type CategoryContentData = {
   type: 'category'
   data: {
+    title: CategoryData['title']
+    index: CategoryData['index']
     hasCategoryPage: boolean
     route: string
-    index: CategoryData['index']
-    title: CategoryData['title']
     description: CategoryData['description']
-    items: (MarkdownCategory | MarkdownDocument)[]
-    metadata: any
+    items: ContentData[]
+    metadata: CategoryData['metadata']
   }
 }
 
-export type PageContent = MarkdownDocument | MarkdownCategory
+export type ContentData = MarkdownContentData | CategoryContentData
 
-export type PageData = {
-  content: PageContent
+export type PageProps = {
+  content: ContentData
   sidebar: SidebarItem[]
   toc: ToCItem[]
 }
@@ -92,5 +77,7 @@ export type SidebarCategoryItem = {
 }
 
 export type SidebarItem = SidebarCategoryItem | SidebarDocumentItem
+
+export type BreadcrumbItem = { title: string; route: string }
 
 export type ToCItem = { text: string; id: string; depth: number }

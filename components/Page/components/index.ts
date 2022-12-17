@@ -1,1 +1,1 @@
-export * from './PageContent'
+export * from './Content'

@@ -5,7 +5,7 @@ export function TableOfContents() {
   const toc = useToCData()
 
   return (
-    <aside>
+    <aside className="w-56 p-2 text-sm dark:text-neutral-100 text-neutral-800">
       <ul>
         {toc.map(({ text, id }, index) => (
           <li key={index}>

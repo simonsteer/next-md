@@ -1,7 +1,13 @@
 import fs from 'fs'
 import { omit } from 'lodash'
 import path from 'path'
-import { CategoryData, JSONObject, MarkdownCategory, FolderItem } from 'types'
+import {
+  CategoryData,
+  JSONObject,
+  CategoryContentData,
+  FolderItem,
+  BreadcrumbItem,
+} from 'types'
 import { TraverseDocs } from './traverseDocs'
 
 export const getCategoryData = ({
@@ -16,7 +22,7 @@ export const getCategoryData = ({
   location: string
   item: [string, FolderItem[]]
   traverseDocs: TraverseDocs
-}): MarkdownCategory => {
+}): CategoryContentData => {
   const [dirName, dirItems] = item
 
   let title: CategoryData['title'] = dirName
@@ -45,6 +51,8 @@ export const getCategoryData = ({
     metadata = omit(categoryData, ['index', 'title', 'description'])
   }
 
+  const route = categoryPath.slice(root.length)
+
   const categoryItems = dirItems
     .filter(item => Array.isArray(item) || item.endsWith('.md'))
     .map((item, itemIndex) =>
@@ -56,8 +64,6 @@ export const getCategoryData = ({
       })
     )
     .sort((a, b) => a.data.index - b.data.index)
-
-  const route = categoryPath.slice(root.length)
 
   const hasCategoryPage =
     categoryItems.every(item => item.type === 'category') ||

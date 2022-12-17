@@ -1,7 +1,7 @@
 import { createContext, ReactNode, useContext, useMemo } from 'react'
-import { PageData } from 'types'
+import { PageProps } from 'types'
 
-const PageDataContext = createContext<PageData>({
+const PageDataContext = createContext<PageProps>({
   sidebar: [],
   content: {
     type: 'document',
@@ -21,7 +21,7 @@ export const PageDataProvider = ({
   children,
   value,
 }: {
-  value: PageData
+  value: PageProps
   children: ReactNode
 }) => {
   return (

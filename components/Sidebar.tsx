@@ -1,17 +1,17 @@
 import clsx from 'clsx'
 import { useSidebarData } from 'hooks'
 import Link from 'next/link'
-import { ReactNode, useState } from 'react'
+import { ReactNode, useEffect, useState } from 'react'
 import { SidebarCategoryItem, SidebarDocumentItem, SidebarItem } from 'types'
 
 export function Sidebar() {
   const sidebar = useSidebarData()
 
   return (
-    <nav className="text-sm p-2 w-56">
+    <nav className="text-sm p-2 w-56 dark:text-neutral-100 text-neutral-800 border-r dark:border-neutral-700 border-neutral-200">
       <ul>
         {sidebar.map((item, index) => (
-          <li key={index} className="mt-0.5">
+          <li key={index}>
             <SidebarItemComponent item={item} />
           </li>
         ))}
@@ -31,60 +31,72 @@ function SidebarItemComponent({ item }: { item: SidebarItem }) {
   }
 }
 
+const getShouldCategoryBeOpen = (item: SidebarCategoryItem) => {
+  let result = false
+
+  const items: SidebarItem[] = [item]
+  while (items.length > 0 && result === false) {
+    const curr = items.shift()!
+    if (curr.type === 'category') items.push(...curr.items)
+    result = curr.active
+  }
+
+  return result
+}
+
+const rowClassName =
+  'border dark:border-neutral-800 border-neutral-100 dark:hover:bg-neutral-700 hover:bg-neutral-200 rounded-md h-8 pl-2 overflow-hidden'
+
+const activeClassName = 'dark:bg-neutral-700 bg-neutral-200'
+
 function CategoryItem({ item }: { item: SidebarCategoryItem }) {
-  const [isOpen, setIsOpen] = useState(() => {
-    let result = false
+  const [isOpen, setIsOpen] = useState(getShouldCategoryBeOpen(item))
 
-    const items: SidebarItem[] = [item]
-    while (items.length > 0 && result === false) {
-      const curr = items.shift()!
-      result = curr.active
-      if (curr.type === 'category') {
-        console.log(curr)
-        items.push(...curr.items)
-      }
+  useEffect(() => {
+    if (getShouldCategoryBeOpen(item)) {
+      setIsOpen(true)
     }
-
-    return result
-  })
+  }, [item])
 
   let itemChild: ReactNode
   if (item.hasCategoryPage) {
     itemChild = (
-      <li className={clsx('h-6 flex', item.active && 'bg-stone-100')}>
-        <Link href={item.route} className="w-full h-full flex flex-1">
+      <li
+        className={clsx(rowClassName, item.active && activeClassName, 'flex')}
+      >
+        <Link
+          href={item.route}
+          className="w-full h-full flex flex-1 items-center"
+          onClick={() => setIsOpen(true)}
+        >
           <span className="flex flex-1">{item.title}</span>
           <button
+            className="group"
             onClick={e => {
               e.preventDefault()
+              e.stopPropagation()
               setIsOpen(!isOpen)
             }}
-            className={clsx(
-              'w-6 h-6 flex items-center justify-center',
-              isOpen ? 'rotate-180' : 'rotate-90'
-            )}
           >
-            ^
+            <MenuArrow
+              isOpen={isOpen}
+              className="dark:group-hover:bg-neutral-600 group-hover:bg-neutral-300"
+            />
           </button>
         </Link>
       </li>
     )
   } else {
     itemChild = (
-      <li className={clsx('h-6 flex', item.active && 'bg-stone-100')}>
+      <li
+        className={clsx(rowClassName, item.active && activeClassName, 'flex')}
+      >
         <button
-          className="w-full h-full flex flex-1"
+          className="w-full h-full flex flex-1 items-center"
           onClick={() => setIsOpen(!isOpen)}
         >
           <span className="flex flex-1">{item.title}</span>
-          <div
-            className={clsx(
-              'w-6 h-6 flex items-center justify-center',
-              isOpen ? 'rotate-180' : 'rotate-90'
-            )}
-          >
-            ^
-          </div>
+          <MenuArrow isOpen={isOpen} />
         </button>
       </li>
     )
@@ -106,10 +118,31 @@ function CategoryItem({ item }: { item: SidebarCategoryItem }) {
 
 function DocumentItem({ item }: { item: SidebarDocumentItem }) {
   return (
-    <div className={clsx('h-6', item.active && 'bg-stone-100')}>
-      <Link href={item.route} className="block w-full h-full">
+    <div className={clsx(rowClassName, item.active && activeClassName)}>
+      <Link
+        href={item.route}
+        className="block w-full h-full  flex items-center"
+      >
         {item.title}
       </Link>
     </div>
   )
 }
+
+const MenuArrow = ({
+  className,
+  isOpen,
+}: {
+  className?: string
+  isOpen: boolean
+}) => (
+  <div
+    className={clsx(
+      'w-8 h-8 pt-1 flex items-center justify-center rounded-md',
+      isOpen ? 'rotate-180' : 'rotate-90',
+      className
+    )}
+  >
+    ^
+  </div>
+)

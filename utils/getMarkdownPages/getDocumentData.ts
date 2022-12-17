@@ -2,7 +2,7 @@ import fs from 'fs'
 import { omit } from 'lodash'
 import { marked } from 'marked'
 import path from 'path'
-import { MarkdownDocument } from 'types'
+import { BreadcrumbItem, MarkdownContentData } from 'types'
 import { MD_FILE_EXTENSION } from 'vars'
 import { jsonfm } from 'utils'
 
@@ -16,7 +16,7 @@ export const getDocumentData = ({
   location: string
   item: string
   itemIndex: number
-}): MarkdownDocument => {
+}): MarkdownContentData => {
   const itemPath = path.join(location, item)
   const { body, attributes } = jsonfm(fs.readFileSync(itemPath).toString())
 

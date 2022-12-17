@@ -2,7 +2,7 @@ import { usePageData } from 'hooks'
 import { CategoryContent } from './CategoryContent'
 import { MarkdownContent } from './MarkdownContent'
 
-export function PageContent() {
+export function Content() {
   const page = usePageData()
 
   switch (page.content.type) {

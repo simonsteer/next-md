@@ -1,10 +1,10 @@
-import { PageContent } from 'types'
+import { ContentData } from 'types'
 
-export const getPageByRoute = (pages: PageContent[], route: string) => {
+export const getPageByRoute = (pages: ContentData[], route: string) => {
   let pagesToCheck = [...pages]
 
-  let content: PageContent | null = null
-  const getPage = (item: PageContent) => {
+  let content: ContentData | null = null
+  const getPage = (item: ContentData) => {
     switch (item.type) {
       case 'category':
         if (item.data.route === route && item.data.hasCategoryPage) {

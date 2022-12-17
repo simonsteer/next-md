@@ -1,11 +1,11 @@
-import { PageContent, SidebarItem } from 'types'
+import { ContentData, SidebarItem } from 'types'
 import { getMarkdownPages } from './getMarkdownPages'
 
 export function getSidebarData(
   data: ReturnType<typeof getMarkdownPages>,
   route: string
 ): SidebarItem[] {
-  const processItem = (item: PageContent): SidebarItem | false => {
+  const processItem = (item: ContentData): SidebarItem | false => {
     switch (item.type) {
       case 'category':
         return {

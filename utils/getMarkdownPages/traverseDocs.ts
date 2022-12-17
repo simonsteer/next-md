@@ -1,9 +1,4 @@
-import {
-  MarkdownCategory,
-  MarkdownDocument,
-  FolderItem,
-  PageContent,
-} from 'types'
+import { FolderItem, ContentData } from 'types'
 import { getCategoryData } from './getCategoryData'
 import { getDocumentData } from './getDocumentData'
 
@@ -19,7 +14,7 @@ export const traverseDocs = ({
   location: string
   item: FolderItem
   itemIndex: number
-}): PageContent => {
+}): ContentData => {
   if (Array.isArray(item)) {
     return getCategoryData({
       root,
