@@ -1,7 +1,7 @@
 import { MarkdownData } from 'types'
 import remarkGfm from 'remark-gfm'
 import ReactMarkdown from 'react-markdown'
-import { SmartLink } from 'components/SmartLink'
+import { SmartLink } from 'components'
 import { Pre, Heading } from './components'
 
 export function Markdown(page: MarkdownData) {

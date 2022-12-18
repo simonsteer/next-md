@@ -1,6 +1,5 @@
 import clsx from 'clsx'
 import { useToC } from 'hooks'
-import Link from 'next/link'
 import { useEffect } from 'react'
 import { useState } from 'react'
 
@@ -22,7 +21,7 @@ export function TableOfContents() {
                 "before:content-[''] before:absolute before:-left-4 before:top-0.5 before:bottom-0.5 before:w-0.5 dark:before:bg-neutral-300 before:bg-neutral-600"
             )}
           >
-            <Link
+            <a
               href={`#${id}`}
               className={clsx(
                 'block truncate text-ellipsis overflow-hidden',
@@ -31,7 +30,7 @@ export function TableOfContents() {
               )}
             >
               {text}
-            </Link>
+            </a>
           </li>
         ))}
       </ul>

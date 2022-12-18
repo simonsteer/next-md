@@ -1,8 +1,8 @@
 import clsx from 'clsx'
-import { useSidebar } from 'hooks'
-import Link from 'next/link'
 import { ReactNode, useEffect, useState } from 'react'
 import { SidebarCategoryItem, SidebarDocumentItem, SidebarItem } from 'types'
+import { useSidebar } from 'hooks'
+import { SmartLink } from 'components'
 
 export function Sidebar() {
   const sidebar = useSidebar()
@@ -68,7 +68,7 @@ function CategoryItem({ item }: { item: SidebarCategoryItem }) {
       <li
         className={clsx(rowClassName, item.active && activeClassName, 'flex')}
       >
-        <Link
+        <SmartLink
           prefetch={false}
           href={item.route}
           className="w-full h-full flex flex-1 items-center"
@@ -90,7 +90,7 @@ function CategoryItem({ item }: { item: SidebarCategoryItem }) {
               className="dark:group-hover:bg-neutral-600 group-hover:bg-neutral-300"
             />
           </button>
-        </Link>
+        </SmartLink>
       </li>
     )
   } else {
@@ -128,7 +128,7 @@ function CategoryItem({ item }: { item: SidebarCategoryItem }) {
 function DocumentItem({ item }: { item: SidebarDocumentItem }) {
   return (
     <div className={clsx(rowClassName, item.active && activeClassName)}>
-      <Link
+      <SmartLink
         prefetch={false}
         href={item.route}
         className="block w-full h-full flex items-center"
@@ -136,7 +136,7 @@ function DocumentItem({ item }: { item: SidebarDocumentItem }) {
         <span className="block truncate text-ellipsis overflow-hidden">
           {item.title}
         </span>
-      </Link>
+      </SmartLink>
     </div>
   )
 }

@@ -1,7 +1,7 @@
 import clsx from 'clsx'
-import { usePagination } from 'hooks'
-import Link from 'next/link'
 import { ContentSnapshot } from 'types'
+import { usePagination } from 'hooks'
+import { SmartLink } from 'components'
 
 export function Pagination() {
   const { next, prev } = usePagination()
@@ -22,7 +22,7 @@ const PaginationLink = ({
   type: 'prev' | 'next'
 }) => {
   return snapshot ? (
-    <Link
+    <SmartLink
       className={clsx(
         'rounded-md border p-4 dark:border-neutral-700 border-neutral-300 group',
         type === 'next' && 'text-right'
@@ -37,7 +37,7 @@ const PaginationLink = ({
           {snapshot.title}
         </p>
       </div>
-    </Link>
+    </SmartLink>
   ) : (
     <div />
   )

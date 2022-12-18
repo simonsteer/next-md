@@ -1,5 +1,5 @@
-import Link from 'next/link'
 import { CategoryData } from 'types'
+import { SmartLink } from 'components'
 
 export function Category(page: CategoryData) {
   const { description, title, items } = page.data
@@ -17,7 +17,7 @@ export function Category(page: CategoryData) {
       <ul className="grid grid-cols-2 gap-4">
         {items.map((item, index) => (
           <li key={index}>
-            <Link
+            <SmartLink
               href={item.route}
               className="block w-full h-28 px-4 pt-3 pb-4 dark:bg-neutral-700 bg-neutral-200 rounded-md group"
             >
@@ -39,7 +39,7 @@ export function Category(page: CategoryData) {
                   </p>
                 )}
               </div>
-            </Link>
+            </SmartLink>
           </li>
         ))}
       </ul>

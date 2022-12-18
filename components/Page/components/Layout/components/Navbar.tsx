@@ -1,7 +1,6 @@
-import clsx from 'clsx'
 import { ReactNode } from 'react'
-import { ThemeToggle } from 'components'
-import Link from 'next/link'
+import clsx from 'clsx'
+import { ThemeToggle, SmartLink } from 'components'
 
 export function Navbar() {
   return (
@@ -12,9 +11,9 @@ export function Navbar() {
         'border-b dark:border-neutral-700 border-neutral-200'
       )}
     >
-      <Link href="/" className="text-2xl font-bold">
+      <SmartLink href="/" className="text-2xl font-bold">
         Documentation
-      </Link>
+      </SmartLink>
       <div className="flex items-center gap-x-5">
         <NavbarLink href="https://www.github.com/simonsteer/next-md">
           github
