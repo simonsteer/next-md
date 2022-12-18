@@ -11,7 +11,7 @@ export const H = forwardRef<HTMLHeadingElement, HeadingProps>(
     const el = `h${level}`
     const id = getHeadingIdFromChildren(children)
 
-    return createElement(el, { ref, children, id, ...rest })
+    return createElement(el, { ref, id, ...rest }, children)
   }
 )
 

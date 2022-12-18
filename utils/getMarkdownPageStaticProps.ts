@@ -18,8 +18,6 @@ export const getMarkdownPageStaticProps: GetStaticProps<PageProps> = ctx => {
   const normalized = normalizePages(pages)
   const paths = getPaths(pages)
 
-  console.log(paths)
-
   const content = normalized[route]
   const sidebar = getSidebarData(pages, route)
   const toc = getToCData(content)

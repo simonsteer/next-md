@@ -49,10 +49,10 @@ export const Pre = forwardRef<HTMLPreElement, PreProps>(
             style={{ ...innerStyle, ...style }}
             {...rest}
           >
-            {tokens.map((line, i) => (
-              <div {...getLineProps({ line, key: i })}>
-                {line.map((token, key) => (
-                  <span {...getTokenProps({ token, key })} />
+            {tokens.map((line, lineIndex) => (
+              <div key={lineIndex} {...getLineProps({ line })}>
+                {line.map((token, tokenIndex) => (
+                  <span key={tokenIndex} {...getTokenProps({ token })} />
                 ))}
               </div>
             ))}
