@@ -69,6 +69,7 @@ function CategoryItem({ item }: { item: SidebarCategoryItem }) {
         className={clsx(rowClassName, item.active && activeClassName, 'flex')}
       >
         <Link
+          prefetch={false}
           href={item.route}
           className="w-full h-full flex flex-1 items-center"
           onClick={() => setIsOpen(true)}
@@ -127,7 +128,11 @@ function CategoryItem({ item }: { item: SidebarCategoryItem }) {
 function DocumentItem({ item }: { item: SidebarDocumentItem }) {
   return (
     <div className={clsx(rowClassName, item.active && activeClassName)}>
-      <Link href={item.route} className="block w-full h-full flex items-center">
+      <Link
+        prefetch={false}
+        href={item.route}
+        className="block w-full h-full flex items-center"
+      >
         <span className="block truncate text-ellipsis overflow-hidden">
           {item.title}
         </span>
