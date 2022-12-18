@@ -1,7 +1,7 @@
 import { ComponentPropsWithoutRef, forwardRef } from 'react'
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
-import { MarkdownContentData } from 'types'
+import { MarkdownPageData } from 'types'
 import {
   A,
   Blockquote,
@@ -19,10 +19,10 @@ import {
 } from './components'
 
 export type MarkdownProps = Omit<ComponentPropsWithoutRef<'div'>, 'children'> &
-  MarkdownContentData['data']
+  MarkdownPageData['data']
 
 export const Markdown = forwardRef<HTMLDivElement, MarkdownProps>(
-  ({ body, route, index, metadata, title, fileName, ...rest }, ref) => {
+  ({ body, route, index, custom, title, fileName, ...rest }, ref) => {
     return (
       <div ref={ref} {...rest}>
         <ReactMarkdown

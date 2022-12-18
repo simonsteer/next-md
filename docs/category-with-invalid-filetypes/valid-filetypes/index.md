@@ -1,6 +1,5 @@
 ---
-title: Document root item
-index: 0
+title: Valid category
 ---
 
 # [Test 1 (with link)](https://www.google.com)

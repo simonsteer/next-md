@@ -1,17 +1,7 @@
 import { GetStaticPaths } from 'next'
-import { getMarkdownPages } from './getMarkdownPages'
-import { CategoryContentData, MarkdownContentData } from 'types'
+import { getMarkdownPages, getPaths } from './getMarkdownPageData'
 
-export const getMarkdownStaticPaths: GetStaticPaths = () => {
-  let paths: string[] = []
-
-  const getRoutes = (item: CategoryContentData | MarkdownContentData) => {
-    paths.push(item.data.route)
-    if (item.type === 'category') {
-      item.data.items.forEach(getRoutes)
-    }
-  }
-  getMarkdownPages().forEach(getRoutes)
-
-  return { paths, fallback: false }
-}
+export const getMarkdownStaticPaths: GetStaticPaths = () => ({
+  paths: getPaths(getMarkdownPages()),
+  fallback: false,
+})

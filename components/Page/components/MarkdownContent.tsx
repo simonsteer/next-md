@@ -1,7 +1,7 @@
-import { MarkdownContentData } from 'types'
+import { MarkdownPageData } from 'types'
 import { Markdown } from 'components'
 
-export function MarkdownContent(page: MarkdownContentData) {
+export function MarkdownContent(page: MarkdownPageData) {
   return (
     <Markdown
       className="dark:text-neutral-100 text-neutral-800"

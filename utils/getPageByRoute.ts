@@ -1,10 +1,13 @@
-import { ContentData } from 'types'
+import { DenormalizedContentData } from 'types'
 
-export const getPageByRoute = (pages: ContentData[], route: string) => {
+export const getPageByRoute = (
+  pages: DenormalizedContentData[],
+  route: string
+) => {
   let pagesToCheck = [...pages]
 
-  let content: ContentData | null = null
-  const getPage = (item: ContentData) => {
+  let content: DenormalizedContentData | null = null
+  const getPage = (item: DenormalizedContentData) => {
     switch (item.type) {
       case 'category':
         if (item.data.route === route && item.data.hasCategoryPage) {

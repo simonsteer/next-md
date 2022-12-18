@@ -2,17 +2,11 @@ import { getMarkdownPageStaticProps } from 'utils'
 
 export type MarkdownPageProps = ReturnType<typeof getMarkdownPageStaticProps>
 
-export type MarkdownPageMetadata = {
-  slug: string
-  index: number
-  custom: any
-}
-
-export type CategoryData = {
+export type ContentConfig = {
   title: string
   index: number
   description: string | null
-  metadata: JSONObject
+  custom: JSONObject
 }
 
 export type JSONValue =
@@ -25,37 +19,61 @@ export type JSONValue =
 
 export type JSONObject = { [key: string]: JSONValue }
 
-export type MarkdownContentData = {
+export type DenormalizedMarkdownPageData = {
   type: 'document'
   data: {
-    title: string
-    index: number
+    depth: number
     fileName: string
     route: string
     body: string
-    metadata: JSONObject
-  }
+  } & ContentConfig
 }
 
-export type CategoryContentData = {
+export type DenormalizedCategoryPageData = {
   type: 'category'
   data: {
-    title: CategoryData['title']
-    index: CategoryData['index']
+    depth: number
     hasCategoryPage: boolean
     route: string
-    description: CategoryData['description']
-    items: ContentData[]
-    metadata: CategoryData['metadata']
-  }
+    items: DenormalizedContentData[]
+  } & ContentConfig
 }
 
-export type ContentData = MarkdownContentData | CategoryContentData
+export type MarkdownPageData = {
+  type: 'document'
+  data: {
+    depth: number
+    fileName: string
+    route: string
+    body: string
+  } & ContentConfig
+}
+
+export type CategoryPageData = {
+  type: 'category'
+  data: {
+    depth: number
+    hasCategoryPage: boolean
+    route: string
+    items: ContentSnapshot[]
+  } & ContentConfig
+}
+
+export type PageContentData = MarkdownPageData | CategoryPageData
+
+export type DenormalizedPages = DenormalizedContentData[]
+
+export type NormalizedPages = { [route: string]: PageContentData }
+
+export type DenormalizedContentData =
+  | DenormalizedMarkdownPageData
+  | DenormalizedCategoryPageData
 
 export type PageProps = {
-  content: ContentData
+  content: PageContentData
   sidebar: SidebarItem[]
   toc: ToCItem[]
+  breadcrumbs: BreadcrumbItem[]
 }
 
 export type FolderItem = string | [string, FolderItem[]]
@@ -81,3 +99,22 @@ export type SidebarItem = SidebarCategoryItem | SidebarDocumentItem
 export type BreadcrumbItem = { title: string; route: string }
 
 export type ToCItem = { text: string; id: string; depth: number }
+
+export type ContentPagination = {
+  prev: null | ContentSnapshot
+  next: null | ContentSnapshot
+}
+
+export type ContentSnapshot = CategoryContentSnapshot | DocumentContentSnapshot
+
+export type CategoryContentSnapshot = {
+  type: 'category'
+  route: string
+  hasCategoryPage: boolean
+  numItems: number
+} & ContentConfig
+
+export type DocumentContentSnapshot = {
+  type: 'document'
+  route: string
+} & ContentConfig

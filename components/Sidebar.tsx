@@ -8,7 +8,7 @@ export function Sidebar() {
   const sidebar = useSidebarData()
 
   return (
-    <nav className="text-sm p-2 w-56 dark:text-neutral-100 text-neutral-800 border-r dark:border-neutral-700 border-neutral-200">
+    <nav className="text-sm p-2 w-64 dark:text-neutral-100 text-neutral-800 border-r dark:border-neutral-700 border-neutral-200">
       <ul>
         {sidebar.map((item, index) => (
           <li key={index}>

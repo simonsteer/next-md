@@ -1,6 +1,6 @@
 ---
-title: Document root item
-index: 0
+index: 6
+title: Another root document
 ---
 
 # [Test 1 (with link)](https://www.google.com)

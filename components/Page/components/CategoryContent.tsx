@@ -1,7 +1,7 @@
 import Link from 'next/link'
-import { CategoryContentData } from 'types'
+import { CategoryPageData } from 'types'
 
-export function CategoryContent(page: CategoryContentData) {
+export function CategoryContent(page: CategoryPageData) {
   const { description, title, items } = page.data
 
   return (
@@ -18,21 +18,24 @@ export function CategoryContent(page: CategoryContentData) {
         {items.map((item, index) => (
           <li key={index}>
             <Link
-              href={item.data.route}
+              href={item.route}
               className="block w-full h-28 px-4 pt-3 pb-4 dark:bg-neutral-700 bg-neutral-200 rounded-md group"
             >
-              <div className="group-hover:opacity-50">
-                <h2 className="font-bold mb-0 dark:text-neutral-100 text-neutral-800">
-                  {item.data.title}
-                </h2>
+              <div className="group-hover:opacity-50 flex h-full flex-col justify-between">
+                <div>
+                  <h2 className="font-bold mb-0 dark:text-neutral-100 text-neutral-800">
+                    {item.title}
+                  </h2>
+
+                  {item.description && (
+                    <p className="text-sm dark:text-neutral-300 text-neutral-600 truncate">
+                      {item.description}
+                    </p>
+                  )}
+                </div>
                 {item.type === 'category' && (
-                  <p className="text-sm dark:text-neutral-300 text-neutral-600">
-                    {item.data.items.length} items
-                  </p>
-                )}
-                {item.type === 'document' && (
-                  <p className="text-sm dark:text-neutral-300 text-neutral-600">
-                    {item.data.title}
+                  <p className="text-xs dark:text-neutral-300 text-neutral-600">
+                    {item.numItems} items
                   </p>
                 )}
               </div>

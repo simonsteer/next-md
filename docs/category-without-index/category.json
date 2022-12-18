@@ -1,0 +1,5 @@
+{
+  "title": "Category without index.md",
+  "description": "When a category does not have an index.md file, an index for the category itself will be generated. You can add a custom description (such as this one) by editing the corresponding category.json",
+  "index": 3
+}

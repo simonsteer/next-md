@@ -9,12 +9,15 @@ const PageDataContext = createContext<PageProps>({
       body: '',
       fileName: 'empty',
       index: 0,
-      metadata: {},
-      route: '/',
+      custom: {},
       title: '',
+      description: null,
+      route: '/',
     },
+    pagination: { prev: null, next: null },
   },
   toc: [],
+  breadcrumbs: [],
 })
 
 export const PageDataProvider = ({
