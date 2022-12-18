@@ -15,7 +15,6 @@
     "clsx": "^1.2.1",
     "eslint": "8.29.0",
     "eslint-config-next": "13.0.6",
-    "framer-motion": "^7.10.0",
     "front-matter": "^4.0.2",
     "lodash": "^4.17.21",
     "marked": "^4.2.4",
