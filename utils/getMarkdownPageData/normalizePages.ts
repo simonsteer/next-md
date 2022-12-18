@@ -9,15 +9,15 @@ const flatten = (
   item: DenormalizedContentData
 ): NormalizedPages => {
   if (item.type === 'category') {
-    acc[item.data.route] = {
-      ...item,
-      data: {
-        ...item.data,
-        items: item.data.items.map(item => {
-          flatten(acc, item)
-          return getContentSnapshot(item)
-        }),
-      },
+    const items = item.data.items.map(item => {
+      flatten(acc, item)
+      return getContentSnapshot(item)
+    })
+    if (item.data.hasCategoryPage) {
+      acc[item.data.route] = {
+        ...item,
+        data: { ...item.data, items },
+      }
     }
   } else {
     acc[item.data.route] = item
