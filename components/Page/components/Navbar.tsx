@@ -16,10 +16,11 @@ export function Navbar() {
         Documentation
       </Link>
       <div className="flex items-center gap-x-5">
-        <NavbarLink href="https://www.github.com">github</NavbarLink>
+        <NavbarLink href="https://www.github.com/simonsteer/next-md">
+          github
+        </NavbarLink>
         <NavbarLink href="https://www.twitter.com">twitter</NavbarLink>
         <NavbarLink href="https://www.discord.com">discord</NavbarLink>
-        <NavbarLink href="https://www.twitter.com">support</NavbarLink>
         <ThemeToggle>{theme => (theme === 'dark' ? '🌝' : '🌞')}</ThemeToggle>
       </div>
     </nav>

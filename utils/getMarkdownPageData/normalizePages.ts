@@ -1,32 +1,27 @@
 import { DenormalizedContentData, NormalizedPages } from 'types'
 import { getContentSnapshot } from './getContentSnapshot'
 
-export const normalizePages = (pages: DenormalizedContentData[]) => {
-  const graph: NormalizedPages = {}
+export const normalizePages = (pages: DenormalizedContentData[]) =>
+  pages.reduce(flatten, {})
 
-  let prev: null | DenormalizedContentData = null
-  const itemsToFlatten = [...pages]
-
-  while (itemsToFlatten.length > 0) {
-    const curr = itemsToFlatten.shift()!
-    if (curr.type === 'category') {
-      itemsToFlatten.push(...curr.data.items)
+const flatten = (
+  acc: NormalizedPages,
+  item: DenormalizedContentData
+): NormalizedPages => {
+  if (item.type === 'category') {
+    acc[item.data.route] = {
+      ...item,
+      data: {
+        ...item.data,
+        items: item.data.items.map(item => {
+          flatten(acc, item)
+          return getContentSnapshot(item)
+        }),
+      },
     }
-
-    if (curr.type === 'category') {
-      graph[curr.data.route] = {
-        ...curr,
-        data: {
-          ...curr.data,
-          items: curr.data.items.map(getContentSnapshot),
-        },
-      }
-    } else {
-      graph[curr.data.route] = curr
-    }
-
-    prev = curr
+  } else {
+    acc[item.data.route] = item
   }
 
-  return graph
+  return acc
 }

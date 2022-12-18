@@ -38,16 +38,14 @@ function SidebarItemComponent({ item }: { item: SidebarItem }) {
 }
 
 const getShouldCategoryBeOpen = (item: SidebarCategoryItem) => {
-  let result = false
-
-  const items: SidebarItem[] = [item]
-  while (items.length > 0 && result === false) {
-    const curr = items.shift()!
-    if (curr.type === 'category') items.push(...curr.items)
-    result = curr.active
+  const getHasActiveItem = (acc: boolean, item: SidebarItem): boolean => {
+    if (acc === true || item.active) return true
+    if (item.type === 'category') {
+      return item.items.reduce(getHasActiveItem, false)
+    }
+    return false
   }
-
-  return result
+  return [item].reduce(getHasActiveItem, false)
 }
 
 const rowClassName =
