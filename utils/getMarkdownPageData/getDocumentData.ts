@@ -1,6 +1,6 @@
 import fs from 'fs'
 import path from 'path'
-import { DenormalizedMarkdownPageData } from 'types'
+import { DenormalizedMarkdownData } from 'types'
 import { MD_FILE_EXTENSION } from 'vars'
 import { jsonfm } from 'utils'
 import { getDocumentConfig } from './getDocumentConfig'
@@ -17,7 +17,7 @@ export const getDocumentData = ({
   item: string
   itemIndex: number
   itemDepth: number
-}): DenormalizedMarkdownPageData => {
+}): DenormalizedMarkdownData => {
   const itemPath = path.join(location, item)
 
   const name = item.slice(0, item.length - MD_FILE_EXTENSION.length)

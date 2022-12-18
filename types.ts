@@ -1,7 +1,3 @@
-import { getMarkdownPageStaticProps } from 'utils'
-
-export type MarkdownPageProps = ReturnType<typeof getMarkdownPageStaticProps>
-
 export type ContentConfig = {
   title: string
   index: number
@@ -19,7 +15,7 @@ export type JSONValue =
 
 export type JSONObject = { [key: string]: JSONValue }
 
-export type DenormalizedMarkdownPageData = {
+export type DenormalizedMarkdownData = {
   type: 'document'
   data: {
     depth: number
@@ -29,7 +25,7 @@ export type DenormalizedMarkdownPageData = {
   } & ContentConfig
 }
 
-export type DenormalizedCategoryPageData = {
+export type DenormalizedCategoryData = {
   type: 'category'
   data: {
     depth: number
@@ -39,7 +35,7 @@ export type DenormalizedCategoryPageData = {
   } & ContentConfig
 }
 
-export type MarkdownPageData = {
+export type MarkdownData = {
   type: 'document'
   data: {
     depth: number
@@ -49,7 +45,7 @@ export type MarkdownPageData = {
   } & ContentConfig
 }
 
-export type CategoryPageData = {
+export type CategoryData = {
   type: 'category'
   data: {
     depth: number
@@ -59,18 +55,18 @@ export type CategoryPageData = {
   } & ContentConfig
 }
 
-export type PageContentData = MarkdownPageData | CategoryPageData
+export type ContentData = MarkdownData | CategoryData
 
 export type DenormalizedPages = DenormalizedContentData[]
 
-export type NormalizedPages = { [route: string]: PageContentData }
+export type NormalizedPages = { [route: string]: ContentData }
 
 export type DenormalizedContentData =
-  | DenormalizedMarkdownPageData
-  | DenormalizedCategoryPageData
+  | DenormalizedMarkdownData
+  | DenormalizedCategoryData
 
 export type PageProps = {
-  content: PageContentData
+  content: ContentData
   sidebar: SidebarItem[]
   toc: ToCItem[]
   breadcrumbs: ContentSnapshot[]
@@ -97,7 +93,7 @@ export type SidebarCategoryItem = {
 
 export type SidebarItem = SidebarCategoryItem | SidebarDocumentItem
 
-export type ToCItem = { text: string; id: string; depth: number }
+export type ToCItem = { text: string; id: string; level: number }
 
 export type Pagination = {
   prev: null | ContentSnapshot

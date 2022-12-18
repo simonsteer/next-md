@@ -4,7 +4,7 @@ import path from 'path'
 import {
   ContentConfig,
   JSONObject,
-  DenormalizedCategoryPageData,
+  DenormalizedCategoryData,
   FolderItem,
 } from 'types'
 import { getCategoryConfig } from './getCategoryConfig'
@@ -24,7 +24,7 @@ export const getCategoryData = ({
   location: string
   item: [string, FolderItem[]]
   traverseDocs: TraverseDocs
-}): DenormalizedCategoryPageData => {
+}): DenormalizedCategoryData => {
   const [dirName, dirItems] = item
 
   const categoryPath = path.join(location, dirName)

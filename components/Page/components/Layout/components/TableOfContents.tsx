@@ -1,7 +1,7 @@
 import clsx from 'clsx'
 import { useToC } from 'hooks'
 import Link from 'next/link'
-import { useLayoutEffect } from 'react'
+import { useEffect } from 'react'
 import { useState } from 'react'
 
 export function TableOfContents() {
@@ -11,7 +11,7 @@ export function TableOfContents() {
   if (toc.length === 0) return null
 
   return (
-    <aside className="fixed top-14 right-0 w-56 p-2 text-sm dark:text-neutral-400 text-neutral-500">
+    <aside className="fixed top-14 right-0 w-56 pl-2 py-4 pr-4 text-sm dark:text-neutral-400 text-neutral-500">
       <ul className="relative flex flex-col text-sm gap-y-4 before:content-[''] before:absolute before:-left-4 before:top-0.5 before:bottom-0.5 before:w-0.5 dark:before:bg-neutral-700 before:bg-neutral-200">
         {toc.map(({ text, id }, index) => (
           <li
@@ -43,7 +43,7 @@ const useActiveToCIndex = () => {
   const toc = useToC()
   const [activeIndex, setActiveIndex] = useState(-1)
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     if (toc.length === 0) return
 
     const headings = Array.from(

@@ -1,8 +1,8 @@
 import { marked } from 'marked'
 import slugify from 'slugify'
-import { PageContentData, ToCItem } from 'types'
+import { ContentData, ToCItem } from 'types'
 
-export function getToCData(item: PageContentData): ToCItem[] {
+export function getToCData(item: ContentData): ToCItem[] {
   if (item.type === 'category') return []
 
   return marked.lexer(item.data.body).reduce((acc, token) => {
@@ -21,7 +21,7 @@ export function getToCData(item: PageContentData): ToCItem[] {
       acc.push({
         id,
         text,
-        depth: token.depth,
+        level: token.depth,
       })
     }
     return acc

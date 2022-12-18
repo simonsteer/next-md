@@ -1,7 +1,7 @@
 import Link from 'next/link'
-import { CategoryPageData } from 'types'
+import { CategoryData } from 'types'
 
-export function Category(page: CategoryPageData) {
+export function Category(page: CategoryData) {
   const { description, title, items } = page.data
 
   return (

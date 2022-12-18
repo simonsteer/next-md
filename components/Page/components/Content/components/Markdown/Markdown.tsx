@@ -1,10 +1,10 @@
-import { MarkdownPageData } from 'types'
+import { MarkdownData } from 'types'
 import remarkGfm from 'remark-gfm'
 import ReactMarkdown from 'react-markdown'
 import { SmartLink } from 'components/SmartLink'
 import { Pre, Heading } from './components'
 
-export function Markdown(page: MarkdownPageData) {
+export function Markdown(page: MarkdownData) {
   return (
     <div className="markdown">
       <ReactMarkdown

@@ -1,6 +1,2 @@
+export * from './Layout'
 export * from './Content'
-export * from './Navbar'
-export * from './Sidebar'
-export * from './TableOfContents'
-export * from './Pagination'
-export * from './Breadcrumbs'
