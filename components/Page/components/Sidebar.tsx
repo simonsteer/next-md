@@ -1,11 +1,11 @@
 import clsx from 'clsx'
-import { useSidebarData } from 'hooks'
+import { useSidebar } from 'hooks'
 import Link from 'next/link'
 import { ReactNode, useEffect, useState } from 'react'
 import { SidebarCategoryItem, SidebarDocumentItem, SidebarItem } from 'types'
 
 export function Sidebar() {
-  const sidebar = useSidebarData()
+  const sidebar = useSidebar()
 
   return (
     <nav className="text-sm p-2 w-64 dark:text-neutral-100 text-neutral-800 border-r dark:border-neutral-700 border-neutral-200">

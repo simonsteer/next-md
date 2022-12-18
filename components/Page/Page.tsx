@@ -1,7 +1,13 @@
 import { PageDataProvider } from 'hooks'
 import { PageProps } from 'types'
-import { Sidebar, TableOfContents, Navbar } from 'components'
-import { Content } from './components'
+import {
+  Breadcrumbs,
+  Content,
+  Navbar,
+  Pagination,
+  Sidebar,
+  TableOfContents,
+} from './components'
 
 export function Page(page: PageProps) {
   return (
@@ -12,7 +18,9 @@ export function Page(page: PageProps) {
           <Sidebar />
           <div className="flex-1 p-12">
             <div className="w-full max-w-screen-md mx-auto">
+              <Breadcrumbs />
               <Content />
+              <Pagination />
             </div>
           </div>
           <TableOfContents />

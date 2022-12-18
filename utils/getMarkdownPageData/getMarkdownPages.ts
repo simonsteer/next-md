@@ -13,14 +13,6 @@ export const getMarkdownPages = () => {
     .sort((a, b) => a.data.index - b.data.index)
 }
 
-const filterFn = (item: FolderItem) => {
-  if (Array.isArray(item)) {
-    return false
-  }
-
-  return Array.isArray(item) || item === 'category.json' || item.endsWith('.md')
-}
-
 const filterFolderItem = (item: FolderItem) => {
   if (Array.isArray(item)) {
     let [, [...items]] = item

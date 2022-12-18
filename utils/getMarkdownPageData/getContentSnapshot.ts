@@ -1,8 +1,12 @@
 import { pick } from 'lodash'
-import { DenormalizedContentData, ContentSnapshot } from 'types'
+import {
+  DenormalizedContentData,
+  ContentSnapshot,
+  PageContentData,
+} from 'types'
 
 export const getContentSnapshot = (
-  content: DenormalizedContentData
+  content: DenormalizedContentData | PageContentData
 ): ContentSnapshot => {
   if (content.type === 'document') {
     return {

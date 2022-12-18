@@ -1,16 +1,13 @@
+import { uniq } from 'lodash'
 import { DenormalizedContentData } from 'types'
 
-export const getPaths = (items: DenormalizedContentData[]) => {
-  const paths: string[] = []
-
-  let scan = [...items]
-  while (scan.length > 0) {
-    const curr = scan.shift()!
-    if (curr.type === 'category') scan.push(...curr.data.items)
-    paths.push(curr.data.route)
-  }
-
-  console.log(paths)
-
-  return paths
-}
+export const getPaths = (items: DenormalizedContentData[]) =>
+  uniq(
+    items.reduce((acc, item) => {
+      acc.push(item.data.route)
+      if (item.type === 'category') {
+        acc.push(...getPaths(item.data.items).flatMap(paths => paths))
+      }
+      return acc
+    }, [] as string[])
+  )

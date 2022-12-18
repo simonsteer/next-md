@@ -1,6 +1,6 @@
 import clsx from 'clsx'
 import { ReactNode } from 'react'
-import { ThemeToggle } from './ThemeToggle'
+import { ThemeToggle } from 'components'
 
 export function Navbar() {
   return (

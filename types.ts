@@ -74,6 +74,7 @@ export type PageProps = {
   sidebar: SidebarItem[]
   toc: ToCItem[]
   breadcrumbs: BreadcrumbItem[]
+  pagination: Pagination
 }
 
 export type FolderItem = string | [string, FolderItem[]]
@@ -100,7 +101,7 @@ export type BreadcrumbItem = { title: string; route: string }
 
 export type ToCItem = { text: string; id: string; depth: number }
 
-export type ContentPagination = {
+export type Pagination = {
   prev: null | ContentSnapshot
   next: null | ContentSnapshot
 }

@@ -1,4 +1,4 @@
-import { createContext, ReactNode, useContext, useMemo } from 'react'
+import { createContext, ReactNode, useContext } from 'react'
 import { PageProps } from 'types'
 
 const PageDataContext = createContext<PageProps>({
@@ -9,13 +9,14 @@ const PageDataContext = createContext<PageProps>({
       body: '',
       fileName: 'empty',
       index: 0,
+      depth: 0,
       custom: {},
       title: '',
       description: null,
       route: '/',
     },
-    pagination: { prev: null, next: null },
   },
+  pagination: { prev: null, next: null },
   toc: [],
   breadcrumbs: [],
 })
@@ -36,8 +37,12 @@ export const PageDataProvider = ({
 
 export const usePageData = () => useContext(PageDataContext)
 
-export const useSidebarData = () => usePageData().sidebar
+export const useSidebar = () => usePageData().sidebar
 
-export const useToCData = () => usePageData().toc
+export const useToC = () => usePageData().toc
+
+export const usePagination = () => usePageData().pagination
 
 export const usePageContent = () => usePageData().content
+
+export const useBreadcrumbs = () => usePageData().breadcrumbs

@@ -1,13 +1,25 @@
 import { pick } from 'lodash'
 import { BreadcrumbItem, NormalizedPages } from 'types'
-import { getContentSnapshot } from './getContentSnapshot'
 
 export const getBreadcrumbsData = (
-  graph: NormalizedPages,
+  normalized: NormalizedPages,
   route: string
 ): BreadcrumbItem[] => {
-  const item = graph[route]
-  const breadcrumbs: BreadcrumbItem[] = [pick(item.data, ['title', 'route'])]
+  if (route === '/') {
+    return []
+  }
 
-  return breadcrumbs
+  if (route.indexOf('/') === route.lastIndexOf('/')) {
+    return [pick(normalized[route].data, ['title', 'route'])]
+  }
+
+  return route
+    .slice(1)
+    .split('/')
+    .map((segment, index, segments) => {
+      const prev = segments.slice(0, index)
+      const segmentRoute = '/' + [...prev, segment].join('/')
+
+      return pick(normalized[segmentRoute].data, ['title', 'route'])
+    })
 }
