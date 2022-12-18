@@ -7,7 +7,7 @@ export function Pagination() {
   const { next, prev } = usePagination()
 
   return (
-    <div className="mt-14 grid grid-cols-2 gap-x-2">
+    <div className="mt-28 grid grid-cols-2 gap-x-2">
       <PaginationLink snapshot={prev} type="prev" />
       <PaginationLink snapshot={next} type="next" />
     </div>

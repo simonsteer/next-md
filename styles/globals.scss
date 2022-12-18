@@ -1,6 +1,18 @@
+/* base tailwind setup */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* custom markdown styles */
+@import './markdown.scss';
+
+/* apply sans-serif font across site */
+body {
+  @apply font-sans;
+}
+
+/* import Inter from googlefonts cdn */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
 
 /* text anti-aliasing */
 body,

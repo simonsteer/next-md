@@ -1,19 +1,12 @@
 import { Children, createElement } from 'react'
-import { forwardRef } from 'react'
 import { HeadingProps } from 'react-markdown/lib/ast-to-react'
 import slugify from 'slugify'
 
-export const H = forwardRef<HTMLHeadingElement, HeadingProps>(
-  (
-    { children, level, node, sourcePosition, index, siblingCount, ...rest },
-    ref
-  ) => {
-    const el = `h${level}`
-    const id = getHeadingIdFromChildren(children)
-
-    return createElement(el, { ref, id, ...rest }, children)
-  }
-)
+export const Heading = ({ children, level }: HeadingProps) => {
+  const el = `h${level}`
+  const id = getHeadingIdFromChildren(children)
+  return createElement(el, { id }, children)
+}
 
 // https://github.com/remarkjs/react-markdown/issues/69#issuecomment-289860367
 

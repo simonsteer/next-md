@@ -19,11 +19,11 @@ title: Valid category
 const foo = 'bar'
 ```
 
-hello world
-| abc | def |
-| --- | --- |
-| bar | foo |
-| baz | boo |
+A paragraph with `some inline` code. Some inline code Some inline code Some inline code Some inline code Some inline code Some inline code Some inline code Some inline code Some inline code Some inline code Some inline code Some inline code Some inline code
+
+1. abc
+2. def
+3. ghi
 
 ## 22
 
@@ -33,11 +33,9 @@ hello world
 const foo = 'bar'
 ```
 
-hello world
-| abc | def |
-| --- | --- |
-| bar | foo |
-| baz | boo |
+- abc
+- def
+- ghi
 
 ## 555
 

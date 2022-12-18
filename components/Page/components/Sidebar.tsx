@@ -8,7 +8,13 @@ export function Sidebar() {
   const sidebar = useSidebar()
 
   return (
-    <nav className="text-sm p-2 w-64 dark:text-neutral-100 text-neutral-800 border-r dark:border-neutral-700 border-neutral-200">
+    <nav
+      className={clsx(
+        'text-sm dark:text-neutral-100 text-neutral-800 border-r dark:border-neutral-700 border-neutral-200',
+        'dark:bg-neutral-800 bg-neutral-100',
+        'w-64 p-2 pb-28 fixed top-14 left-0 bottom-0 overflow-y-scroll'
+      )}
+    >
       <ul>
         {sidebar.map((item, index) => (
           <li key={index}>
@@ -69,7 +75,9 @@ function CategoryItem({ item }: { item: SidebarCategoryItem }) {
           className="w-full h-full flex flex-1 items-center"
           onClick={() => setIsOpen(true)}
         >
-          <span className="flex flex-1">{item.title}</span>
+          <span className="block flex-1 truncate text-ellipsis overflow-hidden">
+            {item.title}
+          </span>
           <button
             className="group"
             onClick={e => {
@@ -95,7 +103,9 @@ function CategoryItem({ item }: { item: SidebarCategoryItem }) {
           className="w-full h-full flex flex-1 items-center"
           onClick={() => setIsOpen(!isOpen)}
         >
-          <span className="flex flex-1">{item.title}</span>
+          <span className="flex-1 truncate text-ellipsis overflow-hidden">
+            {item.title.repeat(9)}
+          </span>
           <MenuArrow isOpen={isOpen} />
         </button>
       </li>
@@ -119,11 +129,10 @@ function CategoryItem({ item }: { item: SidebarCategoryItem }) {
 function DocumentItem({ item }: { item: SidebarDocumentItem }) {
   return (
     <div className={clsx(rowClassName, item.active && activeClassName)}>
-      <Link
-        href={item.route}
-        className="block w-full h-full  flex items-center"
-      >
-        {item.title}
+      <Link href={item.route} className="block w-full h-full flex items-center">
+        <span className="block truncate text-ellipsis overflow-hidden">
+          {item.title}
+        </span>
       </Link>
     </div>
   )
@@ -138,7 +147,7 @@ const MenuArrow = ({
 }) => (
   <div
     className={clsx(
-      'w-8 h-8 pt-1 flex items-center justify-center rounded-md',
+      'w-8 h-8 pt-1.5 flex items-center justify-center rounded-md text-lg',
       isOpen ? 'rotate-180' : 'rotate-90',
       className
     )}

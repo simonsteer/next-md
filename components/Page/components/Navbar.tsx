@@ -1,17 +1,20 @@
 import clsx from 'clsx'
 import { ReactNode } from 'react'
 import { ThemeToggle } from 'components'
+import Link from 'next/link'
 
 export function Navbar() {
   return (
     <nav
       className={clsx(
-        'h-14 px-5 flex items-center justify-between',
+        'h-14 fixed z-20 top-0 w-screen px-5 flex items-center justify-between',
         'dark:bg-neutral-800 bg-neutral-100 dark:text-neutral-100 text-neutral-800',
         'border-b dark:border-neutral-700 border-neutral-200'
       )}
     >
-      <span className="text-2xl font-bold ">Documentation</span>
+      <Link href="/" className="text-2xl font-bold">
+        Documentation
+      </Link>
       <div className="flex items-center gap-x-5">
         <NavbarLink href="https://www.github.com">github</NavbarLink>
         <NavbarLink href="https://www.twitter.com">twitter</NavbarLink>

@@ -1,14 +1,14 @@
 import { usePageContent } from 'hooks'
-import { CategoryContent, MarkdownContent } from './components'
+import { Category, Markdown } from './components'
 
 export function Content() {
   const content = usePageContent()
 
   switch (content.type) {
     case 'document':
-      return <MarkdownContent {...content} />
+      return <Markdown {...content} />
     case 'category':
-      return <CategoryContent {...content} />
+      return <Category {...content} />
     default:
       return null
   }

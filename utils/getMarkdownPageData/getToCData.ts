@@ -7,10 +7,13 @@ export function getToCData(item: PageContentData): ToCItem[] {
 
   return marked.lexer(item.data.body).reduce((acc, token) => {
     if (token.type === 'heading') {
-      const text = token.tokens.reduce((acc, t) => {
-        if ('text' in t) return acc + t.text
-        return acc
-      }, '')
+      const text = token.tokens
+        .reduce((acc, t) => {
+          if ('text' in t) return acc + t.text
+          return acc
+        }, '')
+        .replace(/&quot;/g, '"')
+        .replace(/&#39;/g, "'")
 
       let id = slugify(text, { lower: true, strict: true })
       if (!Number.isNaN(parseInt(id[0]))) id = '_' + id

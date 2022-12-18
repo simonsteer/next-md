@@ -1,2 +1,2 @@
-export * from './CategoryContent'
-export * from './MarkdownContent'
+export * from './Category'
+export * from './Markdown'

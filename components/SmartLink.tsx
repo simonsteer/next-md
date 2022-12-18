@@ -1,14 +1,10 @@
 import Link from 'next/link'
 import { ComponentPropsWithoutRef, forwardRef } from 'react'
-import { ReactMarkdownProps } from 'react-markdown/lib/ast-to-react'
 
-export type AProps = ComponentPropsWithoutRef<'a'> & ReactMarkdownProps
+export type SmartLinkProps = ComponentPropsWithoutRef<'a'>
 
-export const A = forwardRef<HTMLAnchorElement, AProps>(
-  (
-    { href, children, node, sourcePosition, index, siblingCount, ...rest },
-    ref
-  ) => {
+export const SmartLink = forwardRef<HTMLAnchorElement, SmartLinkProps>(
+  ({ href, children, ...rest }, ref) => {
     let _href = href || ''
     if (_href.startsWith('/docs')) _href = _href.slice('/docs'.length)
 
