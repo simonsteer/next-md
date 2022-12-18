@@ -1,16 +1,16 @@
-import { pick } from 'lodash'
-import { BreadcrumbItem, NormalizedPages } from 'types'
+import { ContentSnapshot, NormalizedPages } from 'types'
+import { getContentSnapshot } from './getContentSnapshot'
 
 export const getBreadcrumbsData = (
   normalized: NormalizedPages,
   route: string
-): BreadcrumbItem[] => {
+): ContentSnapshot[] => {
   if (route === '/') {
     return []
   }
 
   if (route.indexOf('/') === route.lastIndexOf('/')) {
-    return [pick(normalized[route].data, ['title', 'route'])]
+    return [getContentSnapshot(normalized[route])]
   }
 
   return route
@@ -20,6 +20,6 @@ export const getBreadcrumbsData = (
       const prev = segments.slice(0, index)
       const segmentRoute = '/' + [...prev, segment].join('/')
 
-      return pick(normalized[segmentRoute].data, ['title', 'route'])
+      return getContentSnapshot(normalized[segmentRoute])
     })
 }

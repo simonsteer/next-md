@@ -73,7 +73,7 @@ export type PageProps = {
   content: PageContentData
   sidebar: SidebarItem[]
   toc: ToCItem[]
-  breadcrumbs: BreadcrumbItem[]
+  breadcrumbs: ContentSnapshot[]
   pagination: Pagination
 }
 
@@ -96,8 +96,6 @@ export type SidebarCategoryItem = {
 }
 
 export type SidebarItem = SidebarCategoryItem | SidebarDocumentItem
-
-export type BreadcrumbItem = { title: string; route: string }
 
 export type ToCItem = { text: string; id: string; depth: number }
 
