@@ -23,6 +23,13 @@ export function TableOfContents() {
           >
             <a
               href={`#${id}`}
+              onClick={e => {
+                e.preventDefault()
+                const heading = document.getElementById(id)!
+                const rect = heading.getBoundingClientRect()
+                const scrollPosition = index && rect.top + window.scrollY - 80
+                window.scrollTo({ top: scrollPosition, behavior: 'smooth' })
+              }}
               className={clsx(
                 'block truncate text-ellipsis overflow-hidden',
                 index === activeIndex &&

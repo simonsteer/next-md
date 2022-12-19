@@ -5,7 +5,7 @@ export const Breadcrumbs = () => {
   const breadcrumbs = useBreadcrumbs()
 
   return (
-    <div className="flex items-center gap-2 flex-wrap mb-14 text-xs">
+    <div className="flex items-center gap-2 flex-wrap mb-6 text-xs">
       <SmartLink
         className="dark:text-neutral-100 text-neutral-800 hover:opacity-50"
         href="/"

@@ -6,7 +6,7 @@ export function Category(page: CategoryData) {
 
   return (
     <div>
-      <h1 className="text-3xl font-bold mb-14 dark:text-neutral-100 text-neutral-800">
+      <h1 className="text-3xl font-bold mb-14 pt-8 dark:text-neutral-100 text-neutral-800">
         {title}
       </h1>
       {description && (
