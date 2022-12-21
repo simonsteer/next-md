@@ -7,7 +7,7 @@
   }
   blockquote {
     @apply flex pr-4 mb-6;
-    @apply before:content-[''] before:block before:flex before:flex-col before:mr-4 before:w-1.5 dark:before:bg-stone-700 before:bg-stone-200;
+    @apply before:content-[''] before:block before:flex before:flex-col before:mr-4 before:w-1.5 dark:before:bg-neutral-700 before:bg-neutral-200;
     p {
       @apply mb-0 py-3;
     }
